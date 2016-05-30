@@ -1,0 +1,21 @@
+{
+  "name": "track-hours",
+  "version": "0.0.0",
+  "authors": [
+    "Francielly Cardoso <ciellycardoso@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "knockout": "~3.4.0"
+  }
+}
