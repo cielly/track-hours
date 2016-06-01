@@ -2,46 +2,65 @@
 <html lang="en" data-framework="knockoutjs">
 	<head>
 		<meta charset="utf-8">
-		<title>Knockout.js • TodoMVC</title>
+		<title>Track your hours • Poules </title>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/buttons.css">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<!-- Ionicons -->
+  		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  		<!-- Font Awesome -->
+  		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 	</head>
 
 	<section id="trackhoursapp">
-		Day <strong data-bind="text: cur_day()"></strong>	<button class="destroy" data-bind="click: NextDay"> >> </button>
-			<header id="header">
-				<h1>Tasks</h1>
-				<input id="new-task" data-bind="value: name, valueUpdate: 'afterkeydown',enterKey: addTask" placeholder="New task" autofocus/>
-				<button data-bind="click: function () { addTask(name) }">Add Task</button>
-			</header>
-			<section id="main">
-			<h3>All Tasks</h3>
-			<ul id="task-list" data-bind="foreach: tasks">
-		    	<li>
-		    	<span data-bind="text: title()"></span>
-		    	<span data-bind="text: hours_worked()"></span>
-		    	<button class="destroy" data-bind="click: $root.incrementHoursWorked">AddHour</button>
-		    	<button class="destroy" data-bind="click: $root.decrementHoursWorked">RemoveHour</button>
-				<button class="destroy" data-bind="click: $root.removeTask">Remove</button>
-				</li>
-					
-			</ul>
-			<h3>Filtered Tasks</h3>
-			<ul id="task-list" data-bind="foreach: filteredTasks">
-		    	<li>
-		    	<span data-bind="text: title()"></span>
-		    	<span data-bind="text: hours_worked()"></span>
-		    	<button class="destroy" data-bind="click: $root.incrementHoursWorked">AddHour</button>
-		    	<button class="destroy" data-bind="click: $root.decrementHoursWorked">RemoveHour</button><button class="destroy" data-bind="click: $root.removeTask">Remove</button>
-				</li>
-					
-			</ul>
-			</section>
-			<footer>
-			Total:<span data-bind="text: TotalHours"></span>
-			</footer>
+		<div class="wrap">
+	  		<div class="header"><span>
+		  		<button class="button button-tiny button-plain button-border button-square" data-bind="click: previousDay"><i class="fa fa-chevron-left"></i></button><pad-big>
+		  		DAY <strong data-bind="text: cur_day()"></strong> <pad-big>
+		  		<button class="button button-tiny button-plain button-border button-square" data-bind="click: nextDay"><i class="fa fa-chevron-right"></i></button></span></div>
+		  		
+		  		<div class="wrap-list" style='overflow:auto;'>
+		  			<table>
+			  			<thead><tr>
+					        <th><pad-medium>Task</th><th><pad-small>Hours worked</th><th></th>
+					    </tr></thead>
+						<tbody class="list" data-bind="foreach: filteredTasks">
+						<tr>
+							
+							<td>
+							<label><button data-bind="click: $root.removeTask" class="red-x big-x">&#10006;</button>	
+							<strong data-bind="text: title()"></strong></label>
+							</td>
+							
+							<td>
+							<label style="text-align:center;" ><strong data-bind="text: hours_worked()"></strong>
+							</label>
+							</td>
+							
+							<td>			
+								<button data-bind="click: $root.decrementHoursWorked" class="button button-circle button-tiny"><i class="fa fa-minus"></i></button>
+								<pad-small></pad-small>
+								<button data-bind="click: $root.incrementHoursWorked" class="button button-circle button-tiny"><i class="fa fa-plus"></i></button>
+								<pad-small></pad-small>
+						
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<div class="style-1">
+					<input type="text" id="new-task" data-bind="value: name, valueUpdate: 'afterkeydown',enterKey: addTask" placeholder="New task" autofocus/>
+					<button class="button button-plain button-small button-border button-square" data-bind="click: function () { addTask(name) }"><i class="fa fa-plus"></i></button>
+				</div>	
+
+				<label class="left">Total hours <pad-small> <strong data-bind="text: TotalHours"></strong></label>
+			</div>
+		</div>
+		
 		</section>
-		<footer id="info">
-		</footer>
-		 <script src="bower_components/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+
 		<script type='text/javascript' src='bower_components/knockout/dist/knockout.js'></script>
 		<script src="js/app.js"></script>
 	</body>

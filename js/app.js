@@ -47,17 +47,23 @@ function ViewModel (tasks, cur_day) {
 
 	/* decrement the number of hours worked to the specific task */
 	self.decrementHoursWorked = function (task) {
-		task.hours_worked(task.hours_worked() - 1);			
+		var num = task.hours_worked() - 1;
+		if (num < 0) num = 0;
+
+		task.hours_worked(num);			
 	}
 
 	/* update the current day to the next one */
 	self.nextDay = function () {
-		self.cur_day(self.cur_day() + 1)
+		self.cur_day(self.cur_day() + 1);
 	}
 
 	/* update the current day to the previous one */
 	self.previousDay = function () {
-		self.cur_day(self.cur_day() - 1)
+		var num = self.cur_day() - 1;
+		if (num < 1) num = 1;
+
+		self.cur_day(num);
 	}
 
 	/* compute total hours worked on the specific day */
@@ -73,12 +79,12 @@ function ViewModel (tasks, cur_day) {
 
 	/* store a clean copy of 'tasks' to local storage */
 	ko.computed(function () {
-		localStorage.setItem('all-tasks', ko.toJSON(self.tasks()));
+		localStorage.setItem('alltasks', ko.toJSON(self.tasks()));
 	}.bind(this));
 }	
 
-var tasks = ko.utils.parseJson(localStorage.getItem('all-tasks'));
+var tasks = ko.utils.parseJson(localStorage.getItem('alltasks'));
 
-ko.applyBindings(new ViewModel(tasks || [], 1);
+ko.applyBindings(new ViewModel(tasks || [], 1));
 
 
